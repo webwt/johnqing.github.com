@@ -132,11 +132,11 @@ nav li{
 	text-align:center;
 }
 nav li a{
-	font-size:18px;
-	color:#107697;
+	font-size:14px;
+	color:#333;
 }
 nav .current a{
-	color:#107697
+	color:#ff5f3e;
 }
 /* = Content
 ----------------------------------------------- */
