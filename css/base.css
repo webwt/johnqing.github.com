@@ -1,0 +1,184 @@
+/**
+ * Theme Name: JohnQing
+ */
+ 
+/* reset
+-------------------------------------------------------------- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+	-webkit-text-size-adjust: none;
+}
+:focus {/* remember to define focus styles! */
+	outline: 0;
+}
+html {
+	cursor: url(images/cursor.ico),auto;
+}
+body {
+	background: #fff;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+table {/* tables still need 'cellspacing="0"' in the markup */
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	font-weight: normal;
+	text-align: left;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+a img {
+	border: 0;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	color: #ff5f3e;
+}
+
+/* = Global
+----------------------------------------------- */
+.clear-fix {
+	clear: left;
+}
+/* = Structure
+----------------------------------------------- */
+body {
+	color: #444;
+	font: 14px/1.5 Tahoma, Verdana, Arial,"微软雅黑";
+	margin: 0;
+	min-width: 960px;
+}
+/* Firefox */ 
+::-moz-selection {
+	background: #2e8410; 
+	color: #ffffff; 
+}
+/* Opera,Safari,Chrome */
+::selection {
+	background: #2e8410; 
+	color: #ffffff; 
+}  
+/* = Layout
+----------------------------------------------- */
+header,nav,#content{
+	width:960px;
+	margin:0 auto;
+}
+/* = Header
+----------------------------------------------- */
+header{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+header h1{
+	width:285px;
+	height: 39px;
+	background:url(../images/logo.png);
+}
+header h1 a{
+	display:block;
+	overflow:hidden;
+	text-indent: -2000px;
+}
+/* = Nav
+----------------------------------------------- */
+.nav_section{
+	height:47px;
+	background:#2e8410;
+}
+nav {
+	overflow:hidden;
+	*zoom:1;
+}
+nav li{
+	margin:4px 0 0;
+	float: left;
+	width:74px;
+	text-align:center;
+	line-height:43px;
+}
+nav li a{
+	font-size:18px;
+	color:#fff;
+}
+nav .current{
+	background:#fff;
+}
+nav .current a{
+	color:#2e8410
+}
+/* = Content
+----------------------------------------------- */
+#content{
+	margin:20px auto;
+}
+.title{
+	border-bottom:1px solid #2e8410;
+	padding:0 5px 5px;
+	margin:0 10px;
+	font-size:18px;
+}
+.file_list{
+	padding: 10px 15px 15px;
+}
+.file_list li{
+	font-size: 16px;
+	color:#999;
+}
+.file_list li a{
+	color:#333;
+}
+.title img{
+	margin-right:5px;
+	vertical-align: top;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.title img:hover{
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+/* = Footer
+----------------------------------------------- */
+footer{
+	border-top:2px solid #ddd;
+	padding:10px 0 0;
+	font-size:12px;
+	font-family: "宋体";
+	color:#999;
+	text-indent:10px;
+}
