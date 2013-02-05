@@ -64,7 +64,12 @@ a {
 a:hover {
 	color: #ff5f3e;
 }
-
+.fl{
+	float: left
+}
+.fr{
+	float:right
+}
 /* = Global
 ----------------------------------------------- */
 .clear-fix {
@@ -74,7 +79,7 @@ a:hover {
 ----------------------------------------------- */
 body {
 	color: #444;
-	font: 14px/1.5 Tahoma, Verdana, Arial,"微软雅黑";
+	font: 14px/1.5 Tahoma, Verdana, Arial,"宋体";
 	margin: 0;
 	min-width: 960px;
 }
@@ -90,25 +95,25 @@ body {
 }  
 /* = Layout
 ----------------------------------------------- */
-header,nav,#content{
-	width:960px;
+header,nav,#content,.con{
+	width:80%;
 	margin:0 auto;
 }
 /* = Header
 ----------------------------------------------- */
 header{
-	margin-top:20px;
-	margin-bottom:20px;
+	border-bottom:1px solid #8e8e8e;
 }
 header h1{
-	width:285px;
-	height: 39px;
-	background:url(../images/logo.png);
+	margin-left:20px;
+	height: 77px;
+	line-height:80px;
+	overflow:hidden;
 }
 header h1 a{
-	display:block;
-	overflow:hidden;
-	text-indent: -2000px;
+	font-family:'Agency FB';
+	font-size: 48px;
+	color:#107697
 }
 /* = Nav
 ----------------------------------------------- */
@@ -119,48 +124,65 @@ header h1 a{
 nav {
 	overflow:hidden;
 	*zoom:1;
+	width:160px;
 }
 nav li{
-	margin:4px 0 0;
+	margin:44px 5px 0;
 	float: left;
-	width:74px;
 	text-align:center;
-	line-height:43px;
 }
 nav li a{
 	font-size:18px;
-	color:#fff;
-}
-nav .current{
-	background:#fff;
+	color:#107697;
 }
 nav .current a{
-	color:#2e8410
+	color:#107697
 }
 /* = Content
 ----------------------------------------------- */
 #content{
 	margin:20px auto;
+	overflow:hidden;
+	*zoom:1;
+}
+.categroy{
+	float:left;
+	width:123px;
+	height:333px;
+	background:url(../images/foot.jpg) no-repeat;
 }
 .title{
-	border-bottom:1px solid #2e8410;
-	padding:0 5px 5px;
-	margin:0 10px;
+	position:relative;
+	border-bottom:1px solid #8e8e8e;
+	padding-bottom:3px;
+	text-indent: 20px;
 	font-size:18px;
 }
+.sub_tit{
+	margin:10px;
+	font-family: Georgia, "Microsoft YaHei", serif;
+	color: #000000;
+	font-size: 16px;
+	line-height: 24px;
+}
 .file_list{
-	padding: 10px 15px 15px;
+	margin: 10px 10px 15px;
+	padding:0 10px;
+	line-height:25px;
+	border-left:3px solid #ddd;
 }
 .file_list li{
-	font-size: 16px;
-	color:#999;
+	font-size: 12px;
+	color:#333;
 }
 .file_list li a{
 	color:#333;
+	text-decoration:underline;
 }
 .title img{
-	margin-right:5px;
-	vertical-align: top;
+	position:absolute;
+	top: 10px;
+	left:-20px;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
