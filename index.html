@@ -13,9 +13,9 @@
 		<h1 class="fl"><a href="http://johnqing.github.com">JohnQing</a></h1>
 		<nav class="fr">
 			<ul>
-				<li class="current"><a href="http://johnqing.github.com/">首页</a></li>
-				<li><a href="http://www.cnblogs.com/starweb">博客</a></li>
-				<li><a href="http://johnqing.github.com/about.html">关于我</a></li>
+				<li class="current" id="index"><a href="http://johnqing.github.com/">首页</a></li>
+				<li id="blog"><a href="http://www.cnblogs.com/starweb">博客</a></li>
+				<li id="about"><a href="http://johnqing.github.com/about.html">关于我</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -38,12 +38,22 @@
 	</section>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script type="text/javascript">
-	$.ajax({
-	  type: "get",
-	  url: "http://feed.cnblogs.com/blog/u/42893/rss"
-	}).done(function( msg ) {
-	  alert( "Data Saved: " + msg );
-	});
+(function(){
+	var transitionTiming = function(obj){
+		var transitionArr = ['linear','ease-in','ease-out','ease-in-out'];
+		var i = transitionArr.length * Math.random();
+		i = Math.floor(i);
+
+		obj.css('-webkit-transition-timing-function',transitionArr[i]);
+		obj.css('-moz-transition-timing-function',transitionArr[i]);
+		obj.css('-o-transition-timing-function',transitionArr[i]);
+		obj.css('transition-timing-function',transitionArr[i]);
+	}
+	var titNode = $('.title');
+	for (var i = 0; i < titNode.length; i++) {
+		transitionTiming(titNode.eq(i));
+	};
+})();
 </script>
 </body>
 </html>

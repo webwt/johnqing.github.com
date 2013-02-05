@@ -26,9 +26,6 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 :focus {/* remember to define focus styles! */
 	outline: 0;
 }
-html {
-	cursor: url(images/cursor.ico),auto;
-}
 body {
 	background: #fff;
 	line-height: 1;
@@ -126,17 +123,34 @@ nav {
 	*zoom:1;
 	width:160px;
 }
+nav:hover li{
+	background:rgb(16, 145, 52);
+}
 nav li{
+	background:#107697;
 	margin:44px 5px 0;
 	float: left;
+	padding:5px;
 	text-align:center;
+	-webkit-transition-property: background-color;
+	-webkit-transition-timing-function: cubic-bezier(1,0,1,0);
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-property: background-color;
+	-moz-transition-timing-function: cubic-bezier(1,0,1,0);
+	-moz-transition-duration: 0.5s;
+	-o-transition-property: background-color;
+	-o-transition-timing-function: cubic-bezier(1,0,1,0);
+	-o-transition-duration: 0.5s;
+	-ms-transition-property: background-color;
+	-ms-transition-timing-function: cubic-bezier(1,0,1,0);
+	-ms-transition-duration: 0.5s
 }
 nav li a{
 	font-size:14px;
-	color:#333;
+	color:#fff;
 }
 nav .current a{
-	color:#ff5f3e;
+	color:#fff;
 }
 /* = Content
 ----------------------------------------------- */
@@ -193,4 +207,34 @@ nav .current a{
     -moz-transform: rotate(360deg);
     -o-transform: rotate(360deg);
     transform: rotate(360deg);
+}
+/* = demo
+----------------------------------------------- */
+#index{
+	-webkit-transition-delay: 0s;
+	-moz-transition-delay: 0s;
+	-o-transition-delay: 0s;
+	-ms-transition-delay: 0s;
+}
+#blog{
+	-webkit-transition-delay: 0.5s;
+	-moz-transition-delay: 0.5s;
+	-o-transition-delay: 0.5s;
+	-ms-transition-delay: 0.5s;
+}
+#about{
+	-webkit-transition-delay: 1s;
+	-moz-transition-delay: 1s;
+	-o-transition-delay: 1s;
+	-ms-transition-delay: 1s;
+}
+.con .title {
+	width: 50%;
+	-webkit-transition-duration: 2s;
+	-moz-transition-duration: 2s;
+	-o-transition-duration: 2s;
+	transition-duration: 2s
+}
+.con:hover .title {
+	width:100%;
 }
