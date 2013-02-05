@@ -172,13 +172,3 @@ nav .current a{
     -o-transform: rotate(360deg);
     transform: rotate(360deg);
 }
-/* = Footer
------------------------------------------------ */
-footer{
-	border-top:2px solid #ddd;
-	padding:10px 0 0;
-	font-size:12px;
-	font-family: "宋体";
-	color:#999;
-	text-indent:10px;
-}
