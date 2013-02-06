@@ -238,3 +238,13 @@ nav .current a{
 .con:hover .title {
 	width:100%;
 }
+/* music
+--------------------------------------------*/
+.radio,
+.radio iframe{
+	width: 420px;
+	height: 190px;
+}
+.radio{
+	float:right
+}
