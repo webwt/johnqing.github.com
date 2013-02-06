@@ -1,0 +1,262 @@
+/**
+ * Theme Name: JohnQing
+ */
+ 
+/* reset
+-------------------------------------------------------------- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+	-webkit-text-size-adjust: none;
+}
+:focus {/* remember to define focus styles! */
+	outline: 0;
+}
+body {
+	background: #fff;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+table {/* tables still need 'cellspacing="0"' in the markup */
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	font-weight: normal;
+	text-align: left;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+a img {
+	border: 0;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	color: #ff5f3e;
+}
+.fl{
+	float: left
+}
+.fr{
+	float:right
+}
+/* = Global
+----------------------------------------------- */
+.clear-fix {
+	clear: left;
+}
+/* = Structure
+----------------------------------------------- */
+body {
+	color: #444;
+	font: 14px/1.5 Tahoma, Verdana, Arial,"宋体";
+	margin: 0;
+	min-width: 960px;
+}
+/* Firefox */ 
+::-moz-selection {
+	background: #2e8410; 
+	color: #ffffff; 
+}
+/* Opera,Safari,Chrome */
+::selection {
+	background: #2e8410; 
+	color: #ffffff; 
+}  
+/* = Layout
+----------------------------------------------- */
+header,nav,#content,.con{
+	width:80%;
+	margin:0 auto;
+}
+/* = Header
+----------------------------------------------- */
+header{
+	border-bottom:1px solid #8e8e8e;
+}
+header h1{
+	margin-left:20px;
+	height: 77px;
+	line-height:80px;
+	overflow:hidden;
+}
+header h1 a{
+	font-family:'Agency FB';
+	font-size: 48px;
+	color:#107697
+}
+/* = Nav
+----------------------------------------------- */
+.nav_section{
+	height:47px;
+	background:#2e8410;
+}
+nav {
+	overflow:hidden;
+	*zoom:1;
+	width:160px;
+}
+nav:hover li{
+	background:rgb(16, 145, 52);
+}
+nav li{
+	background:#107697;
+	margin:44px 5px 0;
+	float: left;
+	padding:5px;
+	text-align:center;
+	-webkit-transition-property: background-color;
+	-webkit-transition-timing-function: cubic-bezier(1,0,1,0);
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-property: background-color;
+	-moz-transition-timing-function: cubic-bezier(1,0,1,0);
+	-moz-transition-duration: 0.5s;
+	-o-transition-property: background-color;
+	-o-transition-timing-function: cubic-bezier(1,0,1,0);
+	-o-transition-duration: 0.5s;
+	-ms-transition-property: background-color;
+	-ms-transition-timing-function: cubic-bezier(1,0,1,0);
+	-ms-transition-duration: 0.5s
+}
+nav li a{
+	font-size:14px;
+	color:#fff;
+}
+nav .current a{
+	color:#fff;
+}
+/* = Content
+----------------------------------------------- */
+#content{
+	margin:20px auto;
+	overflow:hidden;
+	*zoom:1;
+}
+.categroy{
+	float:left;
+	width:123px;
+	height:333px;
+	background:url(../images/foot.jpg) no-repeat;
+}
+.title{
+	position:relative;
+	border-bottom:1px solid #8e8e8e;
+	padding-bottom:3px;
+	text-indent: 20px;
+	font-size:18px;
+}
+.sub_tit{
+	margin:10px;
+	font-family: Georgia, "Microsoft YaHei", serif;
+	color: #000000;
+	font-size: 16px;
+	line-height: 24px;
+}
+.file_list{
+	margin: 10px 10px 15px;
+	padding:0 10px;
+	line-height:25px;
+	border-left:3px solid #ddd;
+}
+.file_list li{
+	font-size: 12px;
+	color:#333;
+}
+.file_list li a{
+	color:#333;
+	text-decoration:underline;
+}
+.title img{
+	position:absolute;
+	top: 10px;
+	left:-20px;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.title img:hover{
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+/* = demo
+----------------------------------------------- */
+#index{
+	-webkit-transition-delay: 0s;
+	-moz-transition-delay: 0s;
+	-o-transition-delay: 0s;
+	-ms-transition-delay: 0s;
+}
+#blog{
+	-webkit-transition-delay: 0.5s;
+	-moz-transition-delay: 0.5s;
+	-o-transition-delay: 0.5s;
+	-ms-transition-delay: 0.5s;
+}
+#about{
+	-webkit-transition-delay: 1s;
+	-moz-transition-delay: 1s;
+	-o-transition-delay: 1s;
+	-ms-transition-delay: 1s;
+}
+.con .title {
+	width: 50%;
+	-webkit-transition-duration: 2s;
+	-moz-transition-duration: 2s;
+	-o-transition-duration: 2s;
+	transition-duration: 2s
+}
+.con:hover .title {
+	width:100%;
+}
+/* 3d 
+----------------------------------------*/
+/*header h1{
+	-webkit-perspective:600; 
+	-webkit-transform-style:preserve-3d; 
+	-webkit-animation-name:x-spin; 
+	-webkit-animation-duration:7s; 
+	-webkit-animation-iteration-count:infinite; 
+	-webkit-animation-timing-function:linear;
+}
+header h1 a{
+	-webkit-transform-style:preserve-3d; 
+	-webkit-animation-iteration-count:infinite; 
+	-webkit-animation-timing-function:linear;
+	webkit-animation-name:y-spin;
+	-webkit-animation-duration:5s;
+}
+@-webkit-keyframes x-spin {
+	0%    { -webkit-transform:rotateY(0deg); }
+	50%   { -webkit-transform:rotateY(180deg); }
+	100%  { -webkit-transform:rotateY(360deg); }
+}*/

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>JohnQing - 记录我的点点滴滴，有转发，原创。</title>
+<!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+	<header class="fr">
+		<h1 class="fl"><a href="http://johnqing.github.com">JohnQing</a></h1>
+		<nav class="fr">
+			<ul>
+				<li class="current" id="index"><a href="http://johnqing.github.com/">首页</a></li>
+				<li id="blog"><a href="http://www.cnblogs.com/starweb">博客</a></li>
+				<li id="about"><a href="http://johnqing.github.com/about.html">关于我</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section id="content" class="fr">
+		<div class="categroy">
+
+		</div>
+		<div class="con fr">
+			<h2 class="title"><img src="images/tit_icon.gif" alt="枫叶">2013</h2>
+			<ul class="file_list">
+				<li><em>2013-01-30</em> <a href="https://github.com/Johnqing/validatejs">验证组件</a></li>
+				<li><em>2013-01-20</em> <a href="https://github.com/Johnqing/rotate">rotate组件</a></li>
+			</ul>
+			<h2 class="title"><img src="images/tit_icon.gif" alt="枫叶">2012</h2>
+			<ul class="file_list">
+				<li><em>2012-12-19 13:29</em> <a href="2012/expression.html">expression到底多影响性能</a></li>
+			</ul>
+		</div>
+	</section>
+<div class="ligth_line">
+	
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript">
+(function(){
+	var transitionTiming = function(obj){
+		var transitionArr = ['linear','ease-in','ease-out','ease-in-out'];
+		var i = transitionArr.length * Math.random();
+		i = Math.floor(i);
+
+		obj.css('-webkit-transition-timing-function',transitionArr[i]);
+		obj.css('-moz-transition-timing-function',transitionArr[i]);
+		obj.css('-o-transition-timing-function',transitionArr[i]);
+		obj.css('transition-timing-function',transitionArr[i]);
+	}
+	var titNode = $('.title');
+	for (var i = 0; i < titNode.length; i++) {
+		transitionTiming(titNode.eq(i));
+	};
+})();
+</script>
+</body>
+</html>
