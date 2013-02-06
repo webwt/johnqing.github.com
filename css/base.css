@@ -238,3 +238,25 @@ nav .current a{
 .con:hover .title {
 	width:100%;
 }
+/* 3d 
+----------------------------------------*/
+/*header h1{
+	-webkit-perspective:600; 
+	-webkit-transform-style:preserve-3d; 
+	-webkit-animation-name:x-spin; 
+	-webkit-animation-duration:7s; 
+	-webkit-animation-iteration-count:infinite; 
+	-webkit-animation-timing-function:linear;
+}
+header h1 a{
+	-webkit-transform-style:preserve-3d; 
+	-webkit-animation-iteration-count:infinite; 
+	-webkit-animation-timing-function:linear;
+	webkit-animation-name:y-spin;
+	-webkit-animation-duration:5s;
+}
+@-webkit-keyframes x-spin {
+	0%    { -webkit-transform:rotateY(0deg); }
+	50%   { -webkit-transform:rotateY(180deg); }
+	100%  { -webkit-transform:rotateY(360deg); }
+}*/
