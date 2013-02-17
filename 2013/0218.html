@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>前端开发技术的发展</title>
+</head>
+<body>
+<a href="http://johnqing.github.com" title="">返回首页</a>
+<div class="post-text">
+<blockquote>
+  <p>对于那些正在构建大型应用程序，而对JavaScript不甚了解的开发者而言，他们最初必须要面对的挑战之一就是如何着手组织代码。起初只要在标记之间嵌入几百行代码就能跑起来，不过很快代码就会变得一塌糊涂……</p>
+</blockquote>
+
+<hr>
+
+<p>对于那些正在构建大型应用程序，而对JavaScript不甚了解的开发者而言，他们最初必须要面对的挑战之一就是如何着手组织代码。起初只要在<code>&lt;script&gt;</code>标记之间嵌入几百行代码就能跑起来，不过很快代码就会变得一塌糊涂。而问题是，JavaScript没有为组织代码提供任何明显帮助。从字面上看，C#有<code>using</code>，Java有<code>import</code>——而JavaScript一无所有。这迫使JavaScript编写者试验不同的约定，并使用现有的语言创建了一些切实可行的方法来组织大型JavaScript应用程序。</p>
+
+<blockquote>
+  <p><em>各种模式（patterns）、工具（tools）及惯例（practices）会形成现代JavaScript的基础，它们必将来自于语言本身实现之外。</em></p>
+  
+  <p>——<a href="http://blog.rebeccamurphey.com/modern-javascript">Rebecca Murphy</a></p>
+</blockquote>
+
+<h1>模块模式（The Module Pattern）</h1>
+
+<p>用于解决组织代码问题、使用最为广泛的方法之一是<strong>模块模式（Module Pattern）</strong>。我尝试在下面解释一个基本示例，并讨论其若干特性。要想阅读更精彩的说明，并了解用尽各种不同方法的怪人，那么请参阅Ben Cherry的帖子——<a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">JavaScript Module Pattern: In-Depth（深入理解JavaScript模块模式）</a>。</p>
+
+<pre><code>(function(lab49) {
+
+    function privateAdder(n1, n2) {
+        return n1 + n2;
+    }
+
+    lab49.add = function(n1, n2) {
+        return privateAdder(n1, n2);
+    };
+
+})(window.lab49 = window.lab49 || {});
+</code></pre>
+
+<p>在上例中，我们使用了一些来自语言的基本功能，从而创造出在C#及Java等语言中见过的类似结构。</p>
+
+<h2>隔离（Isolation）</h2>
+
+<p>请注意，这段代码包在被立即调用的函数里（仔细看最后一行）。由于在浏览器中，默认情况下会把JavaScript文件置于全局作用域级别上进行计算（evaluated），因此在我们在文件中声明的任何内容都是随处可用的。想象一下，要是先在lib1.js中声明了<code>var name = '...'</code>，然后又在lib2.js声明了<code>var name = '...'</code> 。那么后一句var声明就会替掉前一句的值——这可不太妙。然而，由于JavaScript拥有函数作用域级别，上例中所声明的一切都位于函数自身作用域内，与全局作用域毫无瓜葛。这意味着，无论系统将来如何变化，位于函数中的任何内容都不会受到影响。</p>
+
+<h2>命名空间（Namespacing）</h2>
+
+<p>在最后一行代码中会看到，我们要么将<code>window.lab49</code>赋给其自身，要么将空对象<code>{}</code>赋给它。尽管看起来有点儿怪，不过让我们一起来看下这样一个虚构系统，系统中的那些js文件一律使用了上例中的函数包装器（function wrapper）。</p>
+
+<p>首个被引入的文件会计算那个或语句（<code>...||...</code>），并发现左侧的表达式undefined（未定义）。由于undefined会被判定为假，因此或语句会进一步计算右侧表达式，在本例中就是空对象。或语句实际上是个表达式，它会返回计算结果，进而将结果赋给全局变量<code>window.lab49</code>。</p>
+
+<p>现在轮到接下来的文件使用此模式了，它会执行或语句，并发现<code>window.lab49</code>目前已是对象实例——真（对象实例会被判定为真）。此时或语句会走捷径，并返回这个会立即赋给其自身的值——其实什么都没做。</p>
+
+<p>由此导致的结果是，首个被引入的文件会创建<code>lab49</code>命名空间（就是个JavaScript对象），而且所有使用这种结构的后续文件都只是重用此现有实例。</p>
+
+<h2>私有状态（Private State）</h2>
+
+<p>正如刚才所说，由于位于函数内部，在其内部声明的所有内容都处于该函数的作用域内，而非全局作用域。这对于隔离代码真是棒极了，不过它还带来了一种效果，那就是没人能调用它。真是中看不中用啊！</p>
+
+<p>刚刚还谈到，创建<code>window.lab49</code>对象是为了用命名空间来有效地管理我们的内容。而且由于变量<code>lab49</code>被附加到<code>window</code>对象上，因此它是全局可用的。为了把其中的内容公布给模块外部，或许有人会公开声称，我们要做的全部就是把一些值附加到那个全局变量上。正如上例中所写的<code>add</code>函数一样。现在，在模块外部就可以通过<code>lab49.add(2, 2)</code>来调用<code>add</code>函数了。</p>
+
+<p>在此函数中声明一些值的另一结果是，要是某个值没有通过将其附加到全局命名空间或者此模块外部的某个对象上的方式来显示公开，那么外部代码就访问不到该值。实际上，我们恰好创建了一些私有值。</p>
+
+<h1>CommonJS模块（CommonJS Modules）</h1>
+
+<p>CommonJS是个社团，主要由服务器端JavaScript运行库（server-side JavaScript runtimes）编写者组成，他们致力于将模块的公开及访问标准化的工作。值得注意的是，他们提议的模块系统并非标准，因为它不是出自制定JavaScript标准的同一社团，所以它更像是服务器端JavaScript运行库编写者彼此之间的非正式约定。</p>
+
+<blockquote>
+  <p><em>我通常会支持CommonJS的想法，但要搞清楚的是：它并不是一份崇高而神圣的规范（就像<a href="http://es5.github.com/">ES5</a>一样）；它只不过是一些人在邮件列表中所讨论的想法。而且多数想法都未付诸实现。</em></p>
+  
+  <p>——<a href="http://dailyjs.com/2010/10/18/modules/">Ryan Dahl</a>， node.js的创造者</p>
+</blockquote>
+
+<p>这份<a href="http://wiki.commonjs.org/wiki/Modules/1.1.1">模块规范</a>的核心相当直截了当。所有模块都要在其自身的上下文中进行计算，并且要有个全局变量<code>exports</code>供模块使用。而全局变量<code>exports</code>只是个普通的JavaScript对象，甚至可以自行往上面附加内容，它与上面展示的命名空间对象（<code>lab49</code>）类似。要想访问某个模块，需调用全局函数<code>require</code>，并指明所请求的包标识符。接着会计算此模块，而且无论返回何值都会将其附加到<code>exports</code>上。然后会缓存此模块，以便后来的<code>require</code>函数调用。</p>
+
+<pre><code>// calculator.js
+// 计算器模块——译注
+exports.add = function(n1, n2) {
+
+};
+
+// app.js
+// 某个需要调用计算器模块的应用程序。
+// './calculator'即包标识符。——译注
+var calculator = require('./calculator');
+
+calculator.add(2, 2);
+</code></pre>
+
+<p>要是摆弄过Node.js，或许会对以上代码有种似曾相识的感觉。这种用Node来实现CommonJS模块的方式真是出奇地简单，在<a href="https://github.com/dannycoates/node-inspector">node-inspector</a>（一款Node调试器）中查看模块时，会显示其包装在函数内部的内容，这些内容正是传递给<code>exports</code>及<code>require</code>的值。非常类似于上面展示的手卷模块内容。</p>
+
+<p>有几个node项目（<a href="https://github.com/sstephenson/stitch">Stitch</a>及<a href="https://github.com/substack/node-browserify">Browserify</a>），它们将CommonJS模块带进了浏览器。服务器端组件会把这些彼此独立的模块js文件打包到单独的js文件中，并把那些代码用生成的模块包装器包起来。</p>
+
+<p>CommonJS主要是为服务器端JavaScript运行库设计的，而且由于有几个属性使得它们难以在浏览器中组织客户端代码。</p>
+
+<ul>
+<li><code>require</code>必须立即返回——要是已经拥有所有内容时这会工作得很好，不过这导致难以使用脚本加载器（script loader）去异步下载脚本。</li>
+<li>每个模块占一个文件——为了合并为CommonJS模块，必须把它们以某种风格组织起来，并包裹到一个函数中。要是没有类似于上面所提及的服务器组件，那么就难以使用它们，并且在许多环境（ASP.NET，Java）下这些服务器组件尚不存在。</li>
+</ul>
+
+<h2>异步模块定义（Asynchronous Module Definition）</h2>
+
+<p>异步模块定义（Asynchronous Module Definition，通常称为AMD）已被设计为适合于浏览器的模块格式。它起初源于CommonJS社团的提案，不过自从迁移到<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">GitHub</a>上以后，现已加入了配套的<a href="https://github.com/amdjs/amdjs-tests">测试套件</a>，以便模块系统编写者来验证其代码是否符合AMD的API。</p>
+
+<p>AMD的核心是<code>define</code>函数。调用<code>define</code>函数最常见的方式是传入三个参数——模块名（也就是说不再与文件名绑定）、该模块依赖的模块标识符数组、以及将会返回该模块定义的工厂函数。（调用<code>define</code>函数的其他方式——详细信息请参阅<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD wiki</a>）。</p>
+
+<pre><code>// 定义calculator（计算器）模块。——译注
+define('calculator', ['adder'], function(adder) {
+    // 返回具有add方法的匿名对象。——译注
+    return {
+        add: function(n1, n2) {
+            /*
+             * 实际调用的是adder（加法器）模块的add方法。
+             * 而且adder模块已在前一参数['adder']中指明了。——译注
+             */
+            return adder.add(n1, n2);
+        }
+    };
+});
+</code></pre>
+
+<p>由于此模块的定义包在<code>define</code>函数的调用中，因此这意味着可以欣然将多个模块都放在单个js文件中。此外，由于当调用模块工厂函数<code>define</code>时，模块加载器已拥有控制权，因此它可以自行安排时间去解决（模块间的）依赖关系——对于那些需要先异步下载的模块，真可谓得心应手。</p>
+
+<p>为了与原先的CommonJS模块提案保持兼容已做出了巨大的努力。有些特殊行为是为了能在模块工厂函数中使用<code>require</code>及<code>exports</code>，这意味着，那些传统的CommonJS模块可直接拿来用。</p>
+
+<p>看起来AMD正在成为颇受欢迎的组织客户端JavaScript应用程序的方式。无论是如<a href="http://requirejs.org/">RequireJS</a>或<a href="https://github.com/unscriptable/curl">curl.js</a>等模块资源加载器，还是像<a href="http://dojotoolkit.org/features/1.6/async-modules">Dojo</a>等最近已支持AMD的JavaScript应用程序，情况都是如此。</p>
+
+<h1>这是否意味着JavaScript很烂？（Does this mean JavaScript sucks?）</h1>
+
+<p>缺乏语言级别的结构，而无法将代码组织到模块中，这可能会让来自其他语言的开发者觉得很不爽。然而，正因为此缺陷才迫使JavaScript开发者想出他们自己的模块组织模式，而且我们已经能够随着JavaScript应用程序的发展进行迭代并改进。欲深入了解此主题请访问<a href="http://tagneto.blogspot.com/">Tagneto</a>的博客。</p>
+
+<p>想象一下，即便在10年前就已将此类功能引入语言。那么他们也不可能想到后来的那些需求，例如在服务器上运行大型JavaScript应用程序、在浏览器中异步加载资源、或者像<a href="http://requirejs.org/docs/api.html#text">text templates（文本模板）</a>（就是些文本加载器，其功能类似于RequireJS）那样引入资源等等。</p>
+
+<p>正在考虑将模块（Modules）作为<a href="http://wiki.ecmascript.org/doku.php?id=harmony%3amodules">Harmony/ECMAScript 6</a>的语言级别功能。这多亏了模块系统编写者们的奇思妙想、以及过去数年中所做的辛勤工作，更有可能的是，我们最终将得到适合于构建现代JavaScript应用程序的语言。</p>
+
+<p><strong>查看英文原文：</strong><a href="http://blog.davidpadbury.com/2011/08/21/javascript-modules/">JavaScript Modules</a></p>
+
+<hr>
+
+<h2>关于作者</h2>
+
+<p><img src="/download/01RJpmsjEVQn" alt="David Padbury"></p>
+
+<p>大家好，我是David Padbury。我在位于纽约的<a href="http://lab49.com" title="Lab49">Lab49</a>公司从事为金融行业创建高级应用程序的工作。我不仅把大部分时间花在开发复杂的HMTL5及JavaScript前端系统上，而且还常常会涉猎Java、.NET、以及其他企业类型的内容。</p>
+
+<p>在一些用户组及会议上，我<a href="http://www.slideshare.net/davidpadbury">谈到</a>过许多与HTML5及JavaScript有关的内容，偶尔也会提及node.js。目前，我致力于帮助那些熟悉更为传统的胖客户端技术（例如WPF、Silverlight、Flex、或Swing）的开发者，以便他们理解如何使用HTML5来构建类似的应用程序。要是您正在围绕这些主题寻找演讲者，那么请<a href="http://davidpadbury.com">联系我</a>。</p>
+
+<p>在此发布内容仅代表个人观点，与我的老板无关。</p>
+                </div>
+
+</body>
+</html>
